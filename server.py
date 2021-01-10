@@ -10,12 +10,13 @@ PORT = 55555
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
 server.listen()
+print(f'[SERVER] Server is listening on {HOST}:{PORT}')
 
 
 def main():
     while True:
         client, addr = server.accept()
-        print(f'{str(addr)} Connected')
+        print(f'[CONNECTION] {str(addr)} Connected')
         receive(client)
 
 
@@ -25,9 +26,9 @@ def receive(client):
             coordinates = client.recv(1024)
             serial_connection.write(coordinates)
             print(coordinates)
-	        time.sleep(0.05)
+            time.sleep(0.05)
         except:
-            print('something went wrong! shuting down now')
+            print('[ERROR]something went wrong! shuting down now')
             break
 
 
