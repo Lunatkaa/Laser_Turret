@@ -18,3 +18,9 @@ def receive():
         try:
             coordinates = server.recv(1024)
             serial_connection.write(coordinates)
+        except:
+            print('something went wrong! shuting down now')
+            break
+
+
+receive()
