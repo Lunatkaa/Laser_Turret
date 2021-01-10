@@ -4,7 +4,7 @@ import time
 
 serial_connection = serial.Serial(port='/dev/ttyACM0', baudrate=9600)
 
-HOST = '10.25.208.42'
+HOST = 'raspberrypi'
 PORT = 55555
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
