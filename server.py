@@ -4,7 +4,8 @@ import time
 
 serial_connection = serial.Serial(port='/dev/ttyACM0', baudrate=9600)
 
-HOST = 'raspberrypi'
+# HOST = socket.gethostbyname(socket.gethostname())
+HOST = '10.25.208.42'
 PORT = 55555
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -25,7 +26,7 @@ def receive(client):
         try:
             coordinates = client.recv(1024)
             serial_connection.write(coordinates)
-            print(coordinates)
+            print(coordinates.decode('ascii'))
             time.sleep(0.05)
         except:
             print('[ERROR]something went wrong! shuting down now')
