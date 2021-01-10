@@ -1,26 +1,33 @@
 import serial
 import socket
+import threading
 
-serial_connection = serial.Serial(port='COM5', baudrate=9600)
+serial_connection = serial.Serial(port='/dev/ttyACM0', baudrate=9600)
 
 HOST = 'raspberrypi'
 PORT = 55555
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
-
-client, addr = server.accept()
-print(f'{addr} Connected')
+server.listen()
 
 
-def receive():
+def main():
+    while True:
+        client, addr = server.accept()
+        print(f'{str(addr)} Connected')
+        receive(client)
+
+
+def receive(client):
     while True:
         try:
-            coordinates = server.recv(1024)
+            coordinates = client.recv(1024)
             serial_connection.write(coordinates)
+            print(coordinates)
         except:
             print('something went wrong! shuting down now')
             break
 
 
-receive()
+main()
