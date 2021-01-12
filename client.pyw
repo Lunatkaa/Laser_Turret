@@ -2,7 +2,7 @@ import tkinter
 import time
 import socket
 
-HOST = '10.25.208.42'
+HOST = 'raspberrypi'
 PORT = 55555
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
